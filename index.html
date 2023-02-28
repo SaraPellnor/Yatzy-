@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+    <title>Yatzy</title>
+</head>
+<body>
+
+    <!-- START -->
+    <h1>YATZY</h1>
+    <button class="newGame--btn">New Game</button>
+    <button class="scoreBoard--btn">Score Board</button>
+
+    <!-- Score Board display: none-->
+    <div class="scoreBoard--div" style="display: none;">
+        <ol class="playerScore--ol"></ol>
+        <button class="return--btn">Return</button>
+    </div>
+
+    <!-- Game Setup display: none-->
+    <div class="gameSetup--div" style="display: none;">
+        <div class="addPlayer--div">
+            <ul class="players--ul"></ul>
+            <input class="addPlayer--input" placeholder="Add player name here..."></input>
+        </div>
+        <div class="chooseYatzy--div">
+            <h2>Choose Your Yatzy</h2>
+            <div class="container--btns">
+                <button class="chooseYatzy--btn">Yatzy</button>
+                <button class="chooseMaxiYatzy--btn">Maxi Yatzy</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Game Board display: none-->
+    <div class="scoreKeeper--div" style="display: none;">
+        <table></table>
+    </div>
+    <div class="gameBoard--div" style="display: none;">
+        <div class="savedDice--div"></div>
+        <div class="diceBoad--div"></div>
+        <button class="tossDice--btn">Toss Dice</button>
+        <button class="endGame--btn">End Game</button>
+    </div>
+
+
+</body>
+</html>
