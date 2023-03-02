@@ -9,11 +9,15 @@
     <title>Yatzy</title>
 </head>
 <body>
+    <header>
+        <h1>YATZY</h1>
+    </header>
 
-    <!-- START -->
-    <h1>YATZY</h1>
-    <button class="newGame--btn">New Game</button>
-    <button class="scoreBoard--btn">Score Board</button>
+<!-- START -->
+    <div class="startContainer--div">
+        <button class="newGame--btn">New Game</button>
+        <button class="scoreBoard--btn">Score Board</button>
+    </div>
 
     <!-- Score Board display: none-->
     <div class="scoreBoard--div" style="display: none;">
@@ -24,7 +28,7 @@
     <!-- Game Setup display: none-->
     <div class="gameSetup--div" style="display: none;">
         <div class="addPlayer--div">
-            <ul class="players--ul"></ul>
+            <ul class="player--ul"></ul>
             <input class="addPlayer--input" placeholder="Add player name here..."></input>
         </div>
         <div class="chooseYatzy--div">
@@ -42,10 +46,12 @@
     </div>
     <div class="gameBoard--div" style="display: none;">
         <div class="savedDice--div"></div>
-        <div class="diceBoad--div"></div>
-        <button class="tossDice--btn">Toss Dice</button>
-        <button class="endGame--btn">End Game</button>
-    </div>
+        <div class="diceBoad--div">
+        </div>
+        <div class="tossDice--div">        
+            <button class="tossDice--btn">Toss Dice</button>
+            <button class="endGame--btn">End Game</button></div>
+        </div>
 
 
 </body>

@@ -1,8 +1,14 @@
+/* Fonts */
+
+  @import url('https://fonts.googleapis.com/css2?family=Shantell+Sans:wght@500&display=swap');
+
+
 /* Universal */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Shantell Sans', cursive;
 }
 
 body {
@@ -14,13 +20,23 @@ body {
     justify-content: space-around;
 }
 
+header {
+    position: fixed;
+    top: 0;
+    width: 100vw;
+    height: 7em;
+}
+
 button {
-    width: 8em;
-    min-height: 3em;
+    width: 15em;
+    height: 5em;
     padding: 1em;
     border: solid 1px black;
-    border-radius: 10px;
-    
+    border-radius: 10px; 
+}
+
+button:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
 /* START */
@@ -29,8 +45,19 @@ h1 {
     align-self: flex-start;
     margin: 1em;
 }
+
+.startContainer--div {
+    width: 40em;
+    height: 50em;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    justify-content: space-around;
+}
+
 .newGame--btn {
-    margin: 0 1em 0 20em;
+    
 }
 
 .newGame--btn:hover {
@@ -38,7 +65,7 @@ h1 {
 }
 
 .scoreBoard--btn {
-    margin: 0 20em 0 1em;
+
 }
 
 .scoreBoard--btn:hover {
@@ -47,18 +74,55 @@ h1 {
 
 /* Score Board */
 .scoreBoard--div {
-    width: 70%;
-    height: auto;
+    background-color: grey;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    justify-content: space-around;
+    height: 70vh;
+    width: 70vw;
 }
 
 .playerScore--ol {
+    width: 40vw;
+    height: 40vh;
     background-color: lightgray;
+
+}
+
+.return--btn {
 
 }
 
 .return--btn:hover {
     background-color: rgb(174, 207, 226);
 
+}
+
+/*POPUP*/
+.popup--div {
+    position: fixed;
+    display: none; /* display: flex; TS */
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 20em;
+    height: 16em;
+    z-index: 1;
+    text-align: center;
+    background-color: rgb(217, 241, 241);
+    color: gray;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    border: 1px solid black;
+}
+
+.popupBtn--div {
+    width: 90%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
 }
 
 /* Game Setup */
@@ -68,23 +132,38 @@ h1 {
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
+    background-color: lightgrey;
 }
 
-.addPlayer--div {
-
+.addPlayer--div, .chooseYatzy--div {
+    height: 9em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    background-color: gray;
+    width: 100%;
 }
 
-.players--ul {
-
+.player--ul {
+    height: 4em;
+    width: 10em;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    /* justify-content: space-between; */
+    list-style: none;
 }
 
 .addPlayer--input {
-text-align: center;
+    width: 15em;
+    text-align: center;
 }
 
-.chooseYatzy--div {
+/* .chooseYatzy--div {
 
-}
+} */
 
 h2 {
 
@@ -104,19 +183,56 @@ h2 {
 
 /* Game Board */
 .scoreKeeper--div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: gray;
+    height: 50%;
+    width: 30%;
+}
+
+table {
+    background-color: aquamarine;
+    height: 90%;
+    width: 90%;
 
 }
 
 .gameBoard--div {
-
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    background-color: gray;
+    width: 45%;
+    height: 50%;
 }
 
 .savedDice--div {
-
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: space-around;
+    background-color: lightgray;
+    width: 90%;
+    height: 20%;
 }
 
 .diceBoad--div {
+    display: flex;
+    background-color: rgb(82, 60, 60);
+    width: 90%;
+    height: 50%;
+}
 
+.tossDice--div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: space-around;
+    background-color: rgb(243, 9, 9);
+    width: 100%;
+    height: 5em;
 }
 
 .tossDice--btn {
