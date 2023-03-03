@@ -209,10 +209,10 @@ table {
 }
 
 .savedDice--div {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    align-content: space-around;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
     background-color: lightgray;
     width: 90%;
     height: 20%;
@@ -228,8 +228,7 @@ table {
     width: 90%;
     height: 50%;
 }
-
-/* Dice animation */
+.savedDice--div > div,
 .diceBoard--div > div {
     display: flex;
     flex-direction: row;
@@ -241,6 +240,7 @@ table {
     background-position: center;
   }
   
+  /* Dice animation */
   .roll-animation {
     animation-name: roll, move, move2;
     animation-duration: 4s, 1s, 1s;

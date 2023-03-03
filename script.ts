@@ -1,18 +1,18 @@
 
 // Global imports from html
 const h1 = document.querySelector("h1") as HTMLHeadingElement
-h1?.addEventListener("click", () => { returnToStart() })
+h1?.addEventListener("click", returnToStart)
 
 const startContainer = document.querySelector(".startContainer--div") as HTMLDivElement
 
 const newGameBtn = document.querySelector(".newGame--btn") as HTMLButtonElement
-newGameBtn.addEventListener("click", () => { gameSetup() })
+newGameBtn.addEventListener("click", gameSetup)
 
 const scoreBoardBtn = document.querySelector(".scoreBoard--btn") as HTMLButtonElement
-scoreBoardBtn.addEventListener("click", () => { scoreBoard() })
+scoreBoardBtn.addEventListener("click", scoreBoard)
 
 const yatzydBtn = document.querySelector(".chooseYatzy--btn") as HTMLButtonElement
-yatzydBtn.addEventListener("click", () => { gameBoard() })
+yatzydBtn.addEventListener("click", gameBoard)
 
 const yatzyMaxidBtn = document.querySelector(".chooseMaxiYatzy--btn") as HTMLButtonElement
 yatzyMaxidBtn.addEventListener("click", () => { /* */ })
@@ -22,15 +22,16 @@ const gameTable = document.querySelector(".game--table") as HTMLTableElement
 const gameBoardDiv = document.querySelector(".gameBoard--div") as HTMLDivElement
 const diceBoardDiv = document.querySelector(".diceBoard--div") as HTMLDivElement
 const tossDiceBtn = document.querySelector(".tossDice--btn") as HTMLButtonElement
-tossDiceBtn.addEventListener("click", () => { rollDice() })
+tossDiceBtn.addEventListener("click", rollDice )
 const dices = diceBoardDiv.querySelectorAll("div")
-const gameSets: string[] = 
-[
-    "Ones", "Twos", "Threes", "Fours", "Fives", "Sixes", 
-    "Three of a kind", "Four of a kind", "Full House", 
-    "Small Straight", "Large Stright", "Yatzy", "Chance"
-]
-
+const gameSets: string[] =
+    [
+        "Ones", "Twos", "Threes", "Fours", "Fives", "Sixes",
+        "Three of a kind", "Four of a kind", "Full House",
+        "Small Straight", "Large Stright", "Yatzy", "Chance"
+    ]
+const savedDiceDiv = document.querySelector(".savedDice--div") as HTMLDivElement
+const savedValue: Number[] = []
 // Global popup
 const popupDiv = document.createElement("div")
 popupDiv.setAttribute("class", "popup--div")
@@ -88,7 +89,7 @@ const appendPlayers = () => players.forEach(player => {
 function scoreBoard() {
     startContainer.style.display = "none"
     scoreBoardDiv.style.display = "flex"
-    returnBtn.addEventListener("click", () => { returnToStart() })
+    returnBtn.addEventListener("click", returnToStart)
 }
 
 // Game Setup
@@ -161,12 +162,53 @@ function rollDice() {
         div.classList.remove('roll-animation');
         void div.offsetWidth;
         div.classList.add("roll-animation");
-
-        setTimeout(()=> {const randomNumber = Math.floor(Math.random() * 6) + 1;
+        const randomNumber = Math.floor(Math.random() * 6) + 1;
+        setTimeout(() => {
             div.style.backgroundImage = `url(./assets/${randomNumber}.png)`
+            div.addEventListener("click", () => { useDice(div, randomNumber) })
         }, 4000)
+
     });
+    tossDiceBtn.removeEventListener("click", rollDice)
+    tossDiceBtn.addEventListener("click", rollDiceTwo)
 }
+
+function useDice(div: HTMLDivElement, randomNumber: Number) {
+    savedDiceDiv.innerHTML = ""
+    diceBoardDiv.removeChild(div)
+    savedValue.push(randomNumber)
+    savedValue.forEach(number => {
+        const savedDice = document.createElement("div")
+        savedDiceDiv?.append(savedDice)
+        savedDice.style.backgroundImage = `url(./assets/${number}.png)`
+        savedDice.addEventListener("click", () => { removeDice(savedDice, number) })
+    });
+    tossDiceBtn.removeEventListener("click", rollDice)
+    tossDiceBtn.addEventListener("click", rollDiceTwo)
+}
+
+function removeDice(savedDice: HTMLDivElement, number: Number) {
+    diceBoardDiv.append(savedDice)
+    savedValue.forEach(value => {
+        if (value === number) {
+            const i = savedValue.indexOf(value)
+            savedValue.splice(i, 1)
+        }
+    });
+
+    savedDice.addEventListener("click", () => { useDice(savedDice, number) })
+    tossDiceBtn.removeEventListener("click", rollDice)
+    tossDiceBtn.addEventListener("click", () => {rollDiceTwo})
+}
+   
+function rollDiceTwo() {
+    
+    const dice = diceBoardDiv.querySelectorAll("div")
+    console.log(dice);
+    // dice.classList.add("roll-animation");
+    
+}
+
 
 // START
 function returnToStart() {

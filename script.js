@@ -1,14 +1,14 @@
 "use strict";
 // Global imports from html
 const h1 = document.querySelector("h1");
-h1 === null || h1 === void 0 ? void 0 : h1.addEventListener("click", () => { returnToStart(); });
+h1 === null || h1 === void 0 ? void 0 : h1.addEventListener("click", returnToStart);
 const startContainer = document.querySelector(".startContainer--div");
 const newGameBtn = document.querySelector(".newGame--btn");
-newGameBtn.addEventListener("click", () => { gameSetup(); });
+newGameBtn.addEventListener("click", gameSetup);
 const scoreBoardBtn = document.querySelector(".scoreBoard--btn");
-scoreBoardBtn.addEventListener("click", () => { scoreBoard(); });
+scoreBoardBtn.addEventListener("click", scoreBoard);
 const yatzydBtn = document.querySelector(".chooseYatzy--btn");
-yatzydBtn.addEventListener("click", () => { gameBoard(); });
+yatzydBtn.addEventListener("click", gameBoard);
 const yatzyMaxidBtn = document.querySelector(".chooseMaxiYatzy--btn");
 yatzyMaxidBtn.addEventListener("click", () => { });
 // Global Game Board
@@ -17,13 +17,15 @@ const gameTable = document.querySelector(".game--table");
 const gameBoardDiv = document.querySelector(".gameBoard--div");
 const diceBoardDiv = document.querySelector(".diceBoard--div");
 const tossDiceBtn = document.querySelector(".tossDice--btn");
-tossDiceBtn.addEventListener("click", () => { rollDice(); });
+tossDiceBtn.addEventListener("click", rollDice);
 const dices = diceBoardDiv.querySelectorAll("div");
 const gameSets = [
     "Ones", "Twos", "Threes", "Fours", "Fives", "Sixes",
     "Three of a kind", "Four of a kind", "Full House",
     "Small Straight", "Large Stright", "Yatzy", "Chance"
 ];
+const savedDiceDiv = document.querySelector(".savedDice--div");
+const savedValue = [];
 // Global popup
 const popupDiv = document.createElement("div");
 popupDiv.setAttribute("class", "popup--div");
@@ -71,7 +73,7 @@ const appendPlayers = () => players.forEach(player => {
 function scoreBoard() {
     startContainer.style.display = "none";
     scoreBoardDiv.style.display = "flex";
-    returnBtn.addEventListener("click", () => { returnToStart(); });
+    returnBtn.addEventListener("click", returnToStart);
 }
 // Game Setup
 function gameSetup() {
@@ -134,11 +136,44 @@ function rollDice() {
         div.classList.remove('roll-animation');
         void div.offsetWidth;
         div.classList.add("roll-animation");
+        const randomNumber = Math.floor(Math.random() * 6) + 1;
         setTimeout(() => {
-            const randomNumber = Math.floor(Math.random() * 6) + 1;
             div.style.backgroundImage = `url(./assets/${randomNumber}.png)`;
+            div.addEventListener("click", () => { useDice(div, randomNumber); });
         }, 4000);
     });
+    tossDiceBtn.removeEventListener("click", rollDice);
+    tossDiceBtn.addEventListener("click", rollDiceTwo);
+}
+function useDice(div, randomNumber) {
+    savedDiceDiv.innerHTML = "";
+    diceBoardDiv.removeChild(div);
+    savedValue.push(randomNumber);
+    savedValue.forEach(number => {
+        const savedDice = document.createElement("div");
+        savedDiceDiv === null || savedDiceDiv === void 0 ? void 0 : savedDiceDiv.append(savedDice);
+        savedDice.style.backgroundImage = `url(./assets/${number}.png)`;
+        savedDice.addEventListener("click", () => { removeDice(savedDice, number); });
+    });
+    tossDiceBtn.removeEventListener("click", rollDice);
+    tossDiceBtn.addEventListener("click", rollDiceTwo);
+}
+function removeDice(savedDice, number) {
+    diceBoardDiv.append(savedDice);
+    savedValue.forEach(value => {
+        if (value === number) {
+            const i = savedValue.indexOf(value);
+            savedValue.splice(i, 1);
+        }
+    });
+    savedDice.addEventListener("click", () => { useDice(savedDice, number); });
+    tossDiceBtn.removeEventListener("click", rollDice);
+    tossDiceBtn.addEventListener("click", () => { rollDiceTwo; });
+}
+function rollDiceTwo() {
+    const dice = diceBoardDiv.querySelectorAll("div");
+    console.log(dice);
+    // dice.classList.add("roll-animation");
 }
 // START
 function returnToStart() {
