@@ -11,8 +11,19 @@ const yatzydBtn = document.querySelector(".chooseYatzy--btn");
 yatzydBtn.addEventListener("click", () => { gameBoard(); });
 const yatzyMaxidBtn = document.querySelector(".chooseMaxiYatzy--btn");
 yatzyMaxidBtn.addEventListener("click", () => { });
+// Global Game Board
 const scoreKeeperDiv = document.querySelector(".scoreKeeper--div");
+const gameTable = document.querySelector(".game--table");
 const gameBoardDiv = document.querySelector(".gameBoard--div");
+const diceBoardDiv = document.querySelector(".diceBoard--div");
+const tossDiceBtn = document.querySelector(".tossDice--btn");
+tossDiceBtn.addEventListener("click", () => { rollDice(); });
+const dices = diceBoardDiv.querySelectorAll("div");
+const gameSets = [
+    "Ones", "Twos", "Threes", "Fours", "Fives", "Sixes",
+    "Three of a kind", "Four of a kind", "Full House",
+    "Small Straight", "Large Stright", "Yatzy", "Chance"
+];
 // Global popup
 const popupDiv = document.createElement("div");
 popupDiv.setAttribute("class", "popup--div");
@@ -98,10 +109,36 @@ function removePlayers(player) {
     playerUl.innerText = "";
     appendPlayers();
 }
+// Game Board
 function gameBoard() {
     gameSetupDiv.style.display = "none";
     scoreKeeperDiv.style.display = "flex";
     gameBoardDiv.style.display = "flex";
+    const tdYatzy = document.createElement("td");
+    tdYatzy.innerText = "YATZY";
+    gameTable.append(tdYatzy);
+    players.forEach(player => {
+        const tdRow = document.createElement("td");
+        tdRow.innerText = player;
+        gameTable.append(tdRow);
+    });
+    gameSets.forEach(game => {
+        const trColumn = document.createElement("tr");
+        trColumn.innerText = game;
+        gameTable.append(trColumn);
+    });
+}
+// Function to roll the dice and random get the sum 
+function rollDice() {
+    dices.forEach((div) => {
+        div.classList.remove('roll-animation');
+        void div.offsetWidth;
+        div.classList.add("roll-animation");
+        setTimeout(() => {
+            const randomNumber = Math.floor(Math.random() * 6) + 1;
+            div.style.backgroundImage = `url(./assets/${randomNumber}.png)`;
+        }, 4000);
+    });
 }
 // START
 function returnToStart() {

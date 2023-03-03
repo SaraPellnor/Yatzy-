@@ -218,12 +218,75 @@ table {
     height: 20%;
 }
 
-.diceBoad--div {
+.diceBoard--div {
     display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-around;
+    padding-bottom: 1em;
     background-color: rgb(82, 60, 60);
     width: 90%;
     height: 50%;
 }
+
+/* Dice animation */
+.diceBoard--div > div {
+    display: flex;
+    flex-direction: row;
+    background-image: url(./assets/6.png);
+    width: 2em;
+    height: 2em;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+  
+  .roll-animation {
+    animation-name: roll, move, move2;
+    animation-duration: 4s, 1s, 1s;
+    animation-delay: 0s, 0s, 3s;
+    animation-timing-function: ease-in-out;
+  }
+
+@keyframes roll {
+    0% {
+      left: 0;
+      top: 0;
+    }
+    50% {
+      left: 50%;
+      top: 50%;
+      transform: rotate(700deg);
+    }
+    100% {
+      left: 0;
+      top: 0;
+    }
+  }
+
+  @keyframes move {
+    0% {
+      transform: translateX(0);
+    }
+    50% {
+      transform: translateY(-200px);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes move2 {
+    0% {
+      transform: translateX(0);
+    }
+    50% {
+      transform: translateY(-50px);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
 
 .tossDice--div {
     display: flex;

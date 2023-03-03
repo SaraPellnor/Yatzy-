@@ -1,7 +1,7 @@
 
 // Global imports from html
 const h1 = document.querySelector("h1") as HTMLHeadingElement
-h1?.addEventListener("click", () => {returnToStart()})
+h1?.addEventListener("click", () => { returnToStart() })
 
 const startContainer = document.querySelector(".startContainer--div") as HTMLDivElement
 
@@ -16,10 +16,20 @@ yatzydBtn.addEventListener("click", () => { gameBoard() })
 
 const yatzyMaxidBtn = document.querySelector(".chooseMaxiYatzy--btn") as HTMLButtonElement
 yatzyMaxidBtn.addEventListener("click", () => { /* */ })
-
+// Global Game Board
 const scoreKeeperDiv = document.querySelector(".scoreKeeper--div") as HTMLDivElement
-
+const gameTable = document.querySelector(".game--table") as HTMLTableElement
 const gameBoardDiv = document.querySelector(".gameBoard--div") as HTMLDivElement
+const diceBoardDiv = document.querySelector(".diceBoard--div") as HTMLDivElement
+const tossDiceBtn = document.querySelector(".tossDice--btn") as HTMLButtonElement
+tossDiceBtn.addEventListener("click", () => { rollDice() })
+const dices = diceBoardDiv.querySelectorAll("div")
+const gameSets: string[] = 
+[
+    "Ones", "Twos", "Threes", "Fours", "Fives", "Sixes", 
+    "Three of a kind", "Four of a kind", "Full House", 
+    "Small Straight", "Large Stright", "Yatzy", "Chance"
+]
 
 // Global popup
 const popupDiv = document.createElement("div")
@@ -78,7 +88,6 @@ const appendPlayers = () => players.forEach(player => {
 function scoreBoard() {
     startContainer.style.display = "none"
     scoreBoardDiv.style.display = "flex"
-
     returnBtn.addEventListener("click", () => { returnToStart() })
 }
 
@@ -120,16 +129,44 @@ function removePlayers(player: string) {
     appendPlayers()
 }
 
+// Game Board
 function gameBoard() {
     gameSetupDiv.style.display = "none"
     scoreKeeperDiv.style.display = "flex"
     gameBoardDiv.style.display = "flex"
-    
+
+    const tdYatzy = document.createElement("td")
+    tdYatzy.innerText = "YATZY"
+    gameTable.append(tdYatzy)
+
+    players.forEach(player => {
+        const tdRow = document.createElement("td")
+        tdRow.innerText = player
+        gameTable.append(tdRow)
+    });
+
+    gameSets.forEach(game => {
+        const trColumn = document.createElement("tr")
+        trColumn.innerText = game
+        gameTable.append(trColumn)
+    });
+
 
 }
 
+// Function to roll the dice and random get the sum 
+function rollDice() {
 
+    dices.forEach((div: HTMLDivElement) => {
+        div.classList.remove('roll-animation');
+        void div.offsetWidth;
+        div.classList.add("roll-animation");
 
+        setTimeout(()=> {const randomNumber = Math.floor(Math.random() * 6) + 1;
+            div.style.backgroundImage = `url(./assets/${randomNumber}.png)`
+        }, 4000)
+    });
+}
 
 // START
 function returnToStart() {
@@ -138,5 +175,4 @@ function returnToStart() {
     startContainer.style.display = "flex"
     scoreKeeperDiv.style.display = "none"
     gameBoardDiv.style.display = "none"
-
 }
