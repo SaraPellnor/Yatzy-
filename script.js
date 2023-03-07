@@ -17,8 +17,7 @@ const gameTable = document.querySelector(".game--table");
 const gameBoardDiv = document.querySelector(".gameBoard--div");
 const diceBoardDiv = document.querySelector(".diceBoard--div");
 const tossDiceBtn = document.querySelector(".tossDice--btn");
-tossDiceBtn.addEventListener("click", rollDice);
-const dices = diceBoardDiv.querySelectorAll("div");
+tossDiceBtn.addEventListener("click", () => { rollDice(); });
 const gameSets = [
     "Ones", "Twos", "Threes", "Fours", "Fives", "Sixes",
     "Three of a kind", "Four of a kind", "Full House",
@@ -132,48 +131,41 @@ function gameBoard() {
 }
 // Function to roll the dice and random get the sum 
 function rollDice() {
-    dices.forEach((div) => {
-        div.classList.remove('roll-animation');
-        void div.offsetWidth;
-        div.classList.add("roll-animation");
+    const DiceBoardChild = diceBoardDiv.querySelectorAll("div");
+    DiceBoardChild.forEach((child) => {
+        child.removeEventListener("click", () => { useDice(child, randomNumber); });
+        child.classList.remove('roll-animation');
+        void child.offsetWidth;
+        child.classList.add("roll-animation");
         const randomNumber = Math.floor(Math.random() * 6) + 1;
         setTimeout(() => {
-            div.style.backgroundImage = `url(./assets/${randomNumber}.png)`;
-            div.addEventListener("click", () => { useDice(div, randomNumber); });
+            child.style.backgroundImage = `url(./assets/${randomNumber}.png)`;
+            child.addEventListener("click", () => { useDice(child, randomNumber); });
         }, 4000);
     });
-    tossDiceBtn.removeEventListener("click", rollDice);
-    tossDiceBtn.addEventListener("click", rollDiceTwo);
 }
-function useDice(div, randomNumber) {
-    savedDiceDiv.innerHTML = "";
-    diceBoardDiv.removeChild(div);
+function useDice(dice, randomNumber) {
+    const parent = dice.parentNode;
+    parent === null || parent === void 0 ? void 0 : parent.removeChild(dice);
     savedValue.push(randomNumber);
-    savedValue.forEach(number => {
-        const savedDice = document.createElement("div");
-        savedDiceDiv === null || savedDiceDiv === void 0 ? void 0 : savedDiceDiv.append(savedDice);
-        savedDice.style.backgroundImage = `url(./assets/${number}.png)`;
-        savedDice.addEventListener("click", () => { removeDice(savedDice, number); });
+    savedDiceDiv.append(dice);
+    const savedDiceChild = savedDiceDiv.querySelectorAll("div");
+    savedDiceChild.forEach(child => {
+        child.classList.remove('roll-animation');
     });
-    tossDiceBtn.removeEventListener("click", rollDice);
-    tossDiceBtn.addEventListener("click", rollDiceTwo);
+    dice.removeEventListener("click", () => { useDice(dice, randomNumber); });
+    dice.addEventListener("click", () => { removeDice(dice, randomNumber); });
 }
-function removeDice(savedDice, number) {
-    diceBoardDiv.append(savedDice);
+function removeDice(dice, number) {
+    const parent = dice.parentNode;
+    parent === null || parent === void 0 ? void 0 : parent.removeChild(dice);
+    diceBoardDiv.append(dice);
     savedValue.forEach(value => {
         if (value === number) {
             const i = savedValue.indexOf(value);
             savedValue.splice(i, 1);
         }
     });
-    savedDice.addEventListener("click", () => { useDice(savedDice, number); });
-    tossDiceBtn.removeEventListener("click", rollDice);
-    tossDiceBtn.addEventListener("click", () => { rollDiceTwo; });
-}
-function rollDiceTwo() {
-    const dice = diceBoardDiv.querySelectorAll("div");
-    console.log(dice);
-    // dice.classList.add("roll-animation");
 }
 // START
 function returnToStart() {
