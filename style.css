@@ -191,11 +191,41 @@ h2 {
     width: 30%;
 }
 
-table {
-    background-color: aquamarine;
-    height: 90%;
-    width: 90%;
 
+
+table {
+  background-color: #fff;
+  border-collapse: collapse;
+  border-spacing: 0;
+  margin: 20px;
+  width: 90%;
+}
+
+th {
+  background-color: #f2f2f2;
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+tr:hover {
+  background-color: #ddd;
+}
+
+table caption {
+  caption-side: bottom;
+  color: #666;
+  font-style: italic;
+  margin-top: 10px;
 }
 
 .gameBoard--div {
@@ -302,6 +332,32 @@ table {
 
 }
 
-.endGame--btn {
+.gameSets:hover {
+  background-color: rgb(122, 121, 121);
+}
 
+.gameSets {
+  background-color: rgb(243, 243, 196);
+}
+
+.blinc-animation {
+  animation-name: blink;
+  animation-duration: 4s;
+  animation-timing-function: ease-in-out;
+}
+
+@keyframes blink {
+  0% {
+    background-color: rgb(122, 121, 121);
+  }
+  50% {
+    background-color: rgb(243, 243, 196);
+  }
+  100% {
+    background-color: rgb(95, 121, 95);
+  }
+}
+
+.endGame--btn {
+  
 }

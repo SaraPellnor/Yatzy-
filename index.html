@@ -5,7 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <script src="script.js" defer></script>
+    <script src="dist/nestedFunctions.js" defer></script>
+    <script src="dist/setup.js" defer></script>
+    <script src="dist/globals.js" defer></script>
+    <script src="dist/gameBoard.js" defer></script>
+    <script src="dist/rules.js" defer></script>
+
     <title>Yatzy</title>
 </head>
 <body>
@@ -43,7 +48,14 @@
     <!-- Game Board display: none-->
     <div class="scoreKeeper--div" style="display: none;">
         <table class="game--table">
-        </table>
+            <thead>
+              <tr>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
     </div>
     <div class="gameBoard--div" style="display: none;">
         <div class="savedDice--div"></div>
@@ -55,7 +67,7 @@
             <div id="dice 5"></div>
         </div>
         <div class="tossDice--div">        
-            <button class="tossDice--btn">Toss Dice</button>
+            <button class="tossDice--btn">Roll Dice</button>
             <button class="endGame--btn">End Game</button></div>
         </div>
 
